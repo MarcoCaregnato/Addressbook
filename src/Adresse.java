@@ -93,4 +93,22 @@ public class Adresse {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void setAdresse(Adresse adresse) {
+        this.name = adresse.name;
+        this.surname = adresse.surname;
+        this.location = adresse.location;
+        this.zipcode = adresse.zipcode;
+        this.country = adresse.country;
+        this.street = adresse.street;
+        this.housenr = adresse.housenr;
+        this.mobilenr = adresse.mobilenr;
+        this.telnr = adresse.telnr;
+        this.email = adresse.email;
+    }
+
+
+
+    public void setAdresse(String s) {
+    }
 }
