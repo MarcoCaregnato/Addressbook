@@ -6,8 +6,22 @@ import java.util.List;
  */
 public class Adressbuch {
 
-    List<Adresse> adresses = new ArrayList<>();
-    int current;
-    int amount = adresses.size();
-    String path;
+    private Adresse[] adresses;
+    private int current;
+    private int amount;
+    private String path;
+
+    public Adressbuch(int max_amount) {
+        adresses = new Adresse[max_amount];
+        current = 0;
+    }
+
+    public Adresse getCurrent() {
+        return adresses[current];
+    }
+
+    public Adresse getNext() {
+        current++;
+        return adresses[current];
+    }
 }
