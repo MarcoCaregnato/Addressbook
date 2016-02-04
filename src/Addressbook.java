@@ -3,14 +3,14 @@ import java.io.*;
 /**
  * Created by Andreas on 03.02.16.
  */
-public class Adressbuch {
+public class Addressbook {
 
     private Address[] addresses;
     private int current;
     private int amount;
     private String path = "/Users/Andreas/Desktop/test/test.csv";
 
-    public Adressbuch(int max_amount) {
+    public Addressbook(int max_amount) {
         addresses = new Address[max_amount];
         current = 0;
     }
