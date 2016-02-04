@@ -1,71 +1,74 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
 
 /**
  * Created by Andreas on 03.02.16.
  */
 public class Adressbuch {
 
-    private Adresse[] adresses;
+    private Address[] addresses;
     private int current;
     private int amount;
-    private String path;
+    private String path = "/Users/Andreas/Desktop/test/test.csv";
 
     public Adressbuch(int max_amount) {
-        adresses = new Adresse[max_amount];
+        addresses = new Address[max_amount];
         current = 0;
     }
 
-    public Adresse getCurrent() {
-        return adresses[current];
+    public Address getCurrent() {
+        return addresses[current];
     }
 
-    public Adresse getNext() {
-        if (current < adresses.length) {
+    public Address getPrevious() {
+        if (current > 0) {
+            current--;
+        }
+        return getCurrent();
+    }
+
+    public Address getNext() {
+        if (current < addresses.length) {
             current++;
         }
-        return adresses[current];
+        return getCurrent();
     }
 
-    public Adresse getFirst() {
+    public Address getFirst() {
         current = 0;
         return getCurrent();
     }
 
-    public Adresse getLast() {
+    public Address getLast() {
         int stelle = -1;
-        for (int i = adresses.length; i >= 0 && stelle == -1; i--) {
-            if (adresses[i] != null) {
+        for (int i = addresses.length - 1; i >= 0 && stelle == -1; i--) {
+            if (addresses[i] != null) {
                 stelle = i;
             }
         }
         current = stelle;
-        return adresses[stelle];
+        return getCurrent();
     }
 
-    public Adresse addNew(Adresse adresse) {
-        adresses[amount + 1] = new Adresse();
-        adresses[amount + 1].setAdresse(adresse);
-        amount++;
-        return getLast();
+    public void addNew(Address address) {
+        if (amount + 1 < addresses.length) {
+            addresses[amount + 1] = new Address();
+            addresses[amount + 1].setAdresse(address);
+            amount++;
+        }
     }
 
-    public Adresse changeCurrent(Adresse adresse) {
-        adresses[current].setAdresse(adresse);
+    public Address changeCurrent(Address address) {
+        addresses[current].setAdresse(address);
         return getCurrent();
     }
 
     public void deleteCurrent() {
-        adresses[current] = null;
+        addresses[current] = null;
     }
 
     public void deleteAll() {
-        for (Adresse x : adresses) {
-            x = null;
+        for (int i = 0; i < addresses.length; i++) {
+            addresses[i] = null;
         }
     }
 
@@ -78,8 +81,8 @@ public class Adressbuch {
                     // Dateiende erkannt
                     break;
                 else {
-                    adresses[amount] = new Adresse();
-                    adresses[amount].setAdresse(line);
+                    addresses[amount] = new Address();
+                    addresses[amount].setAdresse(line);
                     amount++;
                 }
             }
@@ -88,6 +91,21 @@ public class Adressbuch {
             System.out.println("Datei nicht gefunden");
         } catch (IOException e) {
             System.out.println("Lesefehler in Datei");
+        }
+    }
+
+    public void writeAdresses() {
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            for (Address x : addresses) {
+                if (x != null) {
+                    writer.write(x.toString());
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Datei nicht angelegt");
         }
     }
 }

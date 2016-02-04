@@ -1,7 +1,7 @@
 /**
  * Created by Andreas on 03.02.16.
  */
-public class Adresse {
+public class Address {
 
     private String name;
     private String surname;
@@ -94,21 +94,41 @@ public class Adresse {
         this.email = email;
     }
 
-    public void setAdresse(Adresse adresse) {
-        this.name = adresse.name;
-        this.surname = adresse.surname;
-        this.location = adresse.location;
-        this.zipcode = adresse.zipcode;
-        this.country = adresse.country;
-        this.street = adresse.street;
-        this.housenr = adresse.housenr;
-        this.mobilenr = adresse.mobilenr;
-        this.telnr = adresse.telnr;
-        this.email = adresse.email;
+    public void setAdresse(Address address) {
+        this.name = address.name;
+        this.surname = address.surname;
+        this.location = address.location;
+        this.zipcode = address.zipcode;
+        this.country = address.country;
+        this.street = address.street;
+        this.housenr = address.housenr;
+        this.mobilenr = address.mobilenr;
+        this.telnr = address.telnr;
+        this.email = address.email;
     }
 
-
+    public String toString() {
+        return getSurname() + ";" + getName() + ";" + getStreet() + ";" + getHousenr() + ";" +
+                 getLocation() + ";" + getZipcode() + ";" + getCountry() + ";" + getEmail() + ";" +
+                    getMobilenr() + ";" + getTelnr() + "\n";
+    }
 
     public void setAdresse(String s) {
+        String[] array = s.split(";");
+        try {
+            setSurname(array[0]);
+            setName(array[1]);
+            setStreet(array[2]);
+            setHousenr(Integer.parseInt(array[3]));
+            setLocation(array[4]);
+            setZipcode(array[5]);
+            setCountry(array[6]);
+            setEmail(array[7]);
+            setMobilenr(array[8]);
+            setTelnr(array[9]);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+
+        }
     }
 }
