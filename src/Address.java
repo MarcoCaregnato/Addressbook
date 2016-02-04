@@ -94,17 +94,18 @@ public class Address {
         this.email = email;
     }
 
-    public void setAdresse(Address address) {
-        this.name = address.name;
-        this.surname = address.surname;
-        this.location = address.location;
-        this.zipcode = address.zipcode;
-        this.country = address.country;
-        this.street = address.street;
-        this.housenr = address.housenr;
-        this.mobilenr = address.mobilenr;
-        this.telnr = address.telnr;
-        this.email = address.email;
+    public void setAdress(Address address) {
+        //this.surname = address.surname;
+        //this.name = address.name;
+        //this.street = address.street;
+        //this.housenr = address.housenr;
+        //this.location = address.location;
+        //this.zipcode = address.zipcode;
+        //this.country = address.country;
+        //this.email = address.email;
+        //this.mobilenr = address.mobilenr;
+        //this.telnr = address.telnr;
+        this.setAdress(address.toString());
     }
 
     public String toString() {
@@ -113,7 +114,7 @@ public class Address {
                     getMobilenr() + ";" + getTelnr() + "\n";
     }
 
-    public void setAdresse(String s) {
+    public void setAdress(String s) {
         String[] array = s.split(";");
         try {
             setSurname(array[0]);

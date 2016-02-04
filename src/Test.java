@@ -8,13 +8,10 @@ public class Test {
         test.readAdresses();
         test.deleteAll();
         Address neu = new Address();
-        neu.setAdresse("Resch;Andreas;Riedl;19;Steinegg;39053;Italien;andreas.resch@tfobz.net;3420447584;0471376702");
+        neu.setAdress("Resch;Andreas;Riedl;19;Steinegg;39053;Italien;andreas.resch@tfobz.net;3420447584;0471376702");
         test.addNew(neu);
-        neu.setAdresse("Caregnato;Marco;Romstraße;117;Burgstall;39014;Italien;marco.cargenato@tfobz.net;3453123405;");
+        neu.setAdress("Caregnato;Marco;Romstraße;117;Burgstall;39014;Italien;marco.cargenato@tfobz.net;3453123405; ");
         test.addNew(neu);
-        test.getPrevious();
-        test.deleteCurrent();
-        //System.out.println(test.getFirst().toString());
         test.writeAdresses();
     }
 }

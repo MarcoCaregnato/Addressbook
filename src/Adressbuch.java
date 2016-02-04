@@ -53,13 +53,13 @@ public class Adressbuch {
     public void addNew(Address address) {
         if (amount + 1 < addresses.length) {
             addresses[amount + 1] = new Address();
-            addresses[amount + 1].setAdresse(address);
+            addresses[amount + 1].setAdress(address);
             amount++;
         }
     }
 
     public Address changeCurrent(Address address) {
-        addresses[current].setAdresse(address);
+        addresses[current].setAdress(address);
         return getCurrent();
     }
 
@@ -85,7 +85,7 @@ public class Adressbuch {
                     break;
                 else {
                     addresses[amount] = new Address();
-                    addresses[amount].setAdresse(line);
+                    addresses[amount].setAdress(line);
                     amount++;
                 }
             }
