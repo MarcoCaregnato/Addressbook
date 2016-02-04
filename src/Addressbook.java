@@ -19,26 +19,23 @@ public class Addressbook {
         return addresses[current];
     }
 
-    public Address getPrevious() {
+    public void getPrevious() {
         if (current >= 1) {
             current--;
         }
-        return getCurrent();
     }
 
-    public Address getNext() {
+    public void getNext() {
         if (current < addresses.length) {
             current++;
         }
-        return getCurrent();
     }
 
-    public Address getFirst() {
+    public void getFirst() {
         current = 0;
-        return getCurrent();
     }
 
-    public Address getLast() {
+    public void getLast() {
         int stelle = -1;
         for (int i = addresses.length - 1; i >= 0 && stelle == -1; i--) {
             if (addresses[i] != null) {
@@ -46,7 +43,6 @@ public class Addressbook {
             }
         }
         current = stelle;
-        return getCurrent();
     }
 
     public void addNew(Address address) {
@@ -58,14 +54,15 @@ public class Addressbook {
         }
     }
 
-    public Address changeCurrent(Address address) {
+    public void changeCurrent(Address address) {
+        addresses[current] = new Address();
         addresses[current].setAddress(address);
-        return getCurrent();
     }
 
     public void deleteCurrent() {
-        if (current != -1)
-        addresses[current] = null;
+        addresses[current] = new Address();
+        amount--;
+        current--;
     }
 
     public void deleteAll() {
@@ -98,7 +95,6 @@ public class Addressbook {
     }
 
     public void writeAdresses() {
-
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             for (Address x : addresses) {
@@ -110,6 +106,12 @@ public class Addressbook {
             writer.close();
         } catch (IOException e) {
             System.out.println("Datei nicht angelegt");
+        }
+    }
+
+    public void reSort() {
+        for (Address x :addresses) {
+            System.out.println(x.toString());
         }
     }
 }

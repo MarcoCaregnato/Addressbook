@@ -132,4 +132,10 @@ public class Address {
 
         }
     }
+
+    public Address clone() {
+        Address ret = new Address();
+        ret.setAddress(this);
+        return ret;
+    }
 }

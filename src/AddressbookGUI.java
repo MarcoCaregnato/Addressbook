@@ -1,9 +1,13 @@
-import java.awt.Container; import java.awt.Font;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class AddressbookGUI extends JFrame {
+
+    private JFrame stackfail = new JFrame();
 
     private JLabel vorname;
     private JTextField vornamefield;
@@ -42,7 +46,7 @@ public class AddressbookGUI extends JFrame {
     private JButton begin = null;
     private JButton end = null;
 
-    public AddressbookGUI (){
+    public AddressbookGUI(){
 
         //Fenster Titel
         setTitle("Adressbuch");
@@ -131,6 +135,36 @@ public class AddressbookGUI extends JFrame {
         plzfield = new JTextField();
         plzfield.setBounds(175, 320, 80, 20);
 
+        //BUTTON naechste Person
+        fore = new JButton();
+        fore.setText("->");
+        fore.setBounds(150, 350, 50, 50);
+
+        //BUTTON vorherige Person
+        back = new JButton();
+        back.setText("<-");
+        back.setBounds(100, 350, 50, 50);
+
+        //BUTTON erste Person
+        begin = new JButton();
+        begin.setText("<|");
+        begin.setBounds(50, 350, 50, 50);
+
+        //BUTTON letzte Person
+        end = new JButton();
+        end.setText("|>");
+        end.setBounds(200, 350, 50, 50);
+
+        //BUTTON neue Person
+        neu = new JButton();
+        neu.setText("new");
+        neu.setBounds(250, 350, 70, 50);
+
+        //BUTTON Person loeschen
+        cancel = new JButton();
+        cancel.setText("cancel");
+        cancel.setBounds(320, 350, 90, 50);
+
 
 
         Container contentPane = getContentPane();
@@ -166,7 +200,47 @@ public class AddressbookGUI extends JFrame {
         contentPane.add(plz);
         contentPane.add(plzfield);
 
+        contentPane.add(fore);
+        contentPane.add(back);
+        contentPane.add(begin);
+        contentPane.add(end);
+        contentPane.add(neu);
+        contentPane.add(cancel);
+
         //Fenster sichbar machen
         setVisible(true);
+
+        fore.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        stackfail();
+                    }
+                }
+        );
     }
+    /**
+     *
+     */
+    private void stackfail(){
+
+        JButton exit = new JButton();
+        JFrame error = new JFrame();
+
+        error.setBounds(275,200,300,200);
+        error.setTitle("Error!");
+        error.setResizable(false);
+        error.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        exit.setBounds(30, 30, 20, 40);
+        exit.setText("I got it!");
+        exit.addActionListener(
+                new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            error.dispose();
+                        }
+                    });
+        error.add(exit);
+        error.setVisible(true);
+        }
 }
