@@ -3,16 +3,16 @@
  */
 public class Address {
 
-    private String name;
     private String surname;
-    private String location;
-    private String zipcode;
-    private String country;
+    private String name;
     private String street;
     private int housenr;
+    private String location;
+    private int zipcode;
+    private String country;
+    private String email;
     private String mobilenr;
     private String telnr;
-    private String email;
 
     public String getName() {
         return name;
@@ -38,11 +38,11 @@ public class Address {
         this.location = location;
     }
 
-    public String getZipcode() {
+    public int getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
+    public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
 
@@ -94,7 +94,7 @@ public class Address {
         this.email = email;
     }
 
-    public void setAdress(Address address) {
+    public void setAddress(Address address) {
         //this.surname = address.surname;
         //this.name = address.name;
         //this.street = address.street;
@@ -105,28 +105,28 @@ public class Address {
         //this.email = address.email;
         //this.mobilenr = address.mobilenr;
         //this.telnr = address.telnr;
-        this.setAdress(address.toString());
+        this.setAddress(address.toString());
     }
 
     public String toString() {
         return getSurname() + ";" + getName() + ";" + getStreet() + ";" + getHousenr() + ";" +
                  getLocation() + ";" + getZipcode() + ";" + getCountry() + ";" + getEmail() + ";" +
-                    getMobilenr() + ";" + getTelnr() + "\n";
+                    getMobilenr() + ";" + getTelnr();
     }
 
-    public void setAdress(String s) {
+    public void setAddress(String s) {
         String[] array = s.split(";");
         try {
-            setSurname(array[0]);
-            setName(array[1]);
-            setStreet(array[2]);
-            setHousenr(Integer.parseInt(array[3]));
-            setLocation(array[4]);
-            setZipcode(array[5]);
-            setCountry(array[6]);
-            setEmail(array[7]);
-            setMobilenr(array[8]);
-            setTelnr(array[9]);
+            this.setSurname(array[0]);
+            this.setName(array[1]);
+            this.setStreet(array[2]);
+            this.setHousenr(Integer.parseInt(array[3]));
+            this.setLocation(array[4]);
+            this.setZipcode(Integer.parseInt(array[5]));
+            this.setCountry(array[6]);
+            this.setEmail(array[7]);
+            this.setMobilenr(array[8]);
+            this.setTelnr(array[9]);
         }
         catch (ArrayIndexOutOfBoundsException e) {
 

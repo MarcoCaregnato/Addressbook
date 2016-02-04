@@ -20,11 +20,10 @@ public class Addressbook {
     }
 
     public Address getPrevious() {
-        if (current > 0) {
+        if (current >= 1) {
             current--;
-            return getCurrent();
         }
-        else return null;
+        return getCurrent();
     }
 
     public Address getNext() {
@@ -51,15 +50,16 @@ public class Addressbook {
     }
 
     public void addNew(Address address) {
-        if (amount + 1 < addresses.length) {
-            addresses[amount + 1] = new Address();
-            addresses[amount + 1].setAdress(address);
+        if ((amount + 1) < addresses.length) {
             amount++;
+            addresses[amount] = new Address();
+            addresses[amount].setAddress(address);
+            current = amount;
         }
     }
 
     public Address changeCurrent(Address address) {
-        addresses[current].setAdress(address);
+        addresses[current].setAddress(address);
         return getCurrent();
     }
 
@@ -80,12 +80,12 @@ public class Addressbook {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             while (true) {
                 String line = reader.readLine();
-                if (line == null)
+                if (line == null || line.isEmpty())
                     // Dateiende erkannt
                     break;
                 else {
                     addresses[amount] = new Address();
-                    addresses[amount].setAdress(line);
+                    addresses[amount].setAddress(line);
                     amount++;
                 }
             }
@@ -104,6 +104,7 @@ public class Addressbook {
             for (Address x : addresses) {
                 if (x != null) {
                     writer.write(x.toString());
+                    writer.write("\n");
                 }
             }
             writer.close();
