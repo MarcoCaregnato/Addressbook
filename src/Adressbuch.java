@@ -22,8 +22,9 @@ public class Adressbuch {
     public Address getPrevious() {
         if (current > 0) {
             current--;
+            return getCurrent();
         }
-        return getCurrent();
+        else return null;
     }
 
     public Address getNext() {
@@ -63,6 +64,7 @@ public class Adressbuch {
     }
 
     public void deleteCurrent() {
+        if (current != -1)
         addresses[current] = null;
     }
 
@@ -70,6 +72,7 @@ public class Adressbuch {
         for (int i = 0; i < addresses.length; i++) {
             addresses[i] = null;
         }
+        current = -1;
     }
 
     public void readAdresses() {

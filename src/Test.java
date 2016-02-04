@@ -7,7 +7,6 @@ public class Test {
         Adressbuch test = new Adressbuch(10);
         test.readAdresses();
         test.deleteAll();
-        System.out.println(test.getCurrent());
         Address neu = new Address();
         neu.setAdresse("Resch;Andreas;Riedl;19;Steinegg;39053;Italien;andreas.resch@tfobz.net;3420447584;0471376702");
         test.addNew(neu);
@@ -15,7 +14,7 @@ public class Test {
         test.addNew(neu);
         test.getPrevious();
         test.deleteCurrent();
-        System.out.println(test.getLast().toString());
+        //System.out.println(test.getFirst().toString());
         test.writeAdresses();
     }
 }
