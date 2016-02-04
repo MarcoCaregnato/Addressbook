@@ -4,7 +4,7 @@
 public class Test {
 
     public static void main(String[] args) {
-        Adressbuch test = new Adressbuch(10);
+        Adressbuch test = new Adressbuch(100);
         test.readAdresses();
         test.deleteAll();
         Address neu = new Address();
