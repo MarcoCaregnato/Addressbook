@@ -14,7 +14,7 @@ public class Addressbook {
     private String path = "/Users/Andreas/Desktop/test/test.csv";
 
     public Addressbook() {
-        addresses = new ArrayList<Address>();
+        addresses = new ArrayList<>();
         current = 0;
     }
 
@@ -32,6 +32,11 @@ public class Addressbook {
         if (current < addresses.size()) {
             current++;
         }
+        else {
+            addNew(new Address());
+            current++;
+        }
+
     }
 
     public void getFirst() {
@@ -39,13 +44,7 @@ public class Addressbook {
     }
 
     public void getLast() {
-        int stelle = -1;
-        for (int i = addresses.size() - 1; i >= 0 && stelle == -1; i--) {
-            if (addresses.get(i) != null) {
-                stelle = i;
-            }
-        }
-        current = stelle;
+        current = addresses.size() - 1;
     }
 
     public void addNew(Address address) {
