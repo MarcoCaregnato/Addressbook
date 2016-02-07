@@ -55,7 +55,8 @@ public class Addressbook {
     }
 
     public void changeCurrent(Address address) {
-        addresses.get(current).reSet(address.toString());
+        System.out.println(current);
+        addresses.get(current).setAddress(address);
     }
 
     public void deleteCurrent() {
@@ -111,13 +112,16 @@ public class Addressbook {
     }
 
     public void reSort() {
-        for (int i = 1; i < addresses.size(); i++) {
-            int j = i - 1;
-            Address temp = addresses.get(i).clone();
-            if (addresses.get(i).getSurname().compareTo(addresses.get(j).getSurname()) < 0) {
-                addresses.set(i, addresses.get(j).clone());
-                addresses.set(j, temp.clone());
-            }
+        //for (int i = 1; i < addresses.size(); i++) {
+        //    int j = i - 1;
+        //    Address temp = addresses.get(i).clone();
+        //    if (addresses.get(i).getSurname().compareTo(addresses.get(j).getSurname()) < 0) {
+        //        addresses.set(i, addresses.get(j).clone());
+        //        addresses.set(j, temp.clone());
+        //    }
+        //}
+        for (Address x : addresses) {
+            System.out.println(x.toString());
         }
     }
 }
