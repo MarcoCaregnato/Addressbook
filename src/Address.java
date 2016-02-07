@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 /**
  * Created by Andreas on 03.02.16.
  */
@@ -137,5 +139,39 @@ public class Address {
         Address ret = new Address();
         ret.setAddress(this);
         return ret;
+    }
+
+    public void reSet(String s) {
+        String[] array = s.split(";");
+        if (!surname.equals(array[0])) {
+            this.setSurname(array[0]);
+        }
+        if (!name.equals(array[1])) {
+            this.setName(array[1]);
+        }
+        if (!street.equals(array[2])) {
+            this.setStreet(array[2]);
+        }
+        if (housenr != Integer.parseInt(array[3])) {
+            this.setHousenr(Integer.parseInt(array[3]));
+        }
+        if (!location.equals(array[4])) {
+            this.setLocation(array[4]);
+        }
+        if (zipcode != Integer.parseInt(array[5])) {
+            this.setSurname(array[5]);
+        }
+        if (!country.equals(array[6])) {
+            this.setCountry(array[6]);
+        }
+        if (!email.equals(array[7])) {
+            this.setEmail(array[7]);
+        }
+        if (!mobilenr.equals(array[8])) {
+            this.setMobilenr(array[8]);
+        }
+        if (!telnr.equals(array[9])) {
+            this.setTelnr(array[9]);
+        }
     }
 }

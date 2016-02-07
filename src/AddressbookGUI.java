@@ -231,7 +231,7 @@ public class AddressbookGUI extends JFrame {
         error.setTitle("Error!");
         error.setResizable(false);
         error.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        exit.setBounds(30, 30, 20, 40);
+        exit.setBounds(error.getWidth()/2 - 50, error.getHeight()/2 - 12, 100, 25);
         exit.setText("I got it!");
         exit.addActionListener(
                 new ActionListener() {
@@ -240,6 +240,7 @@ public class AddressbookGUI extends JFrame {
                             error.dispose();
                         }
                     });
+        error.setLayout(null);
         error.add(exit);
         error.setVisible(true);
         }

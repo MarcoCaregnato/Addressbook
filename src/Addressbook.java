@@ -1,22 +1,25 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by Andreas on 03.02.16.
  */
 public class Addressbook {
 
-    private Address[] addresses;
+    private List<Address> addresses;
     private int current;
     private int amount;
     private String path = "/Users/Andreas/Desktop/test/test.csv";
 
-    public Addressbook(int max_amount) {
-        addresses = new Address[max_amount];
+    public Addressbook() {
+        addresses = new ArrayList<Address>();
         current = 0;
     }
 
     public Address getCurrent() {
-        return addresses[current];
+        return addresses.get(current);
     }
 
     public void getPrevious() {
@@ -26,7 +29,7 @@ public class Addressbook {
     }
 
     public void getNext() {
-        if (current < addresses.length) {
+        if (current < addresses.size()) {
             current++;
         }
     }
@@ -37,8 +40,8 @@ public class Addressbook {
 
     public void getLast() {
         int stelle = -1;
-        for (int i = addresses.length - 1; i >= 0 && stelle == -1; i--) {
-            if (addresses[i] != null) {
+        for (int i = addresses.size() - 1; i >= 0 && stelle == -1; i--) {
+            if (addresses.get(i) != null) {
                 stelle = i;
             }
         }
@@ -46,33 +49,27 @@ public class Addressbook {
     }
 
     public void addNew(Address address) {
-        if ((amount + 1) < addresses.length) {
-            amount++;
-            addresses[amount] = new Address();
-            addresses[amount].setAddress(address);
-            current = amount;
-        }
+        addresses.add(address);
+        current++;
+        amount++;
     }
 
     public void changeCurrent(Address address) {
-        addresses[current] = new Address();
-        addresses[current].setAddress(address);
+        addresses.get(current).reSet(address.toString());
     }
 
     public void deleteCurrent() {
-        addresses[current] = new Address();
+        addresses.remove(current);
         amount--;
         current--;
     }
 
     public void deleteAll() {
-        for (int i = 0; i < addresses.length; i++) {
-            addresses[i] = null;
-        }
+        addresses.clear();
         current = -1;
     }
 
-    public void readAdresses() {
+    public void readAddresses() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             while (true) {
@@ -81,9 +78,13 @@ public class Addressbook {
                     // Dateiende erkannt
                     break;
                 else {
-                    addresses[amount] = new Address();
-                    addresses[amount].setAddress(line);
+                    //addresses.set(amount, new Address());
+                    //addresses.get(amount).setAddress(line);
+                    Address input = new Address();
+                    input.setAddress(line);
+                    addresses.add(input);
                     amount++;
+                    current++;
                 }
             }
             reader.close();
@@ -94,7 +95,7 @@ public class Addressbook {
         }
     }
 
-    public void writeAdresses() {
+    public void writeAddresses() {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             for (Address x : addresses) {
@@ -110,8 +111,13 @@ public class Addressbook {
     }
 
     public void reSort() {
-        for (Address x :addresses) {
-            System.out.println(x.toString());
+        for (int i = 1; i < addresses.size(); i++) {
+            int j = i - 1;
+            Address temp = addresses.get(i).clone();
+            if (addresses.get(i).getSurname().compareTo(addresses.get(j).getSurname()) < 0) {
+                addresses.set(i, addresses.get(j).clone());
+                addresses.set(j, temp.clone());
+            }
         }
     }
 }
