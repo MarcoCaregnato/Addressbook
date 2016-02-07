@@ -13,7 +13,6 @@ public class Test {
         test.addNew(neu);
         Address neu1 = new Address();
         neu1.setAddress("Caregnato;Marco;Romstraße;117;Burgstall;39014;Italien;marco.cargenato@tfobz.net;3453123405; ");
-        test.changeCurrent(neu1);
         test.addNew(neu1);
         Address neu2 = new Address();
         neu2.setAddress("Surname;Name;Street;1;Location;10000;Country;e@mail.it;1234567890;1234567890");
