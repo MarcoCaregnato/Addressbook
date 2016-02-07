@@ -218,7 +218,7 @@ public class Address {
      * @param email, die gewünschte Email-Adresse für das Objekt
      */
     public void setEmail(String email) {
-        if (email != null && !email.isEmpty())
+        if (email != null && !email.isEmpty() && checkEmail(email))
             this.email = email;
     }
 
@@ -234,24 +234,18 @@ public class Address {
         if (email != null && !email.isEmpty()) {
             int fullstop = 0;
             int at_sign = 0;
-            for (int i = 0; i < email.length() && ret; i++) {
+            for (int i = 0; i < email.length(); i++) {
                 if (email.charAt(i) == '@') {
                     at_sign++;
-                    if (at_sign > 1) {
-                        ret = false;
-                    }
                 }
                 if (email.charAt(i) == '.') {
                     fullstop++;
                 }
             }
-            if (ret && fullstop < 1) {
-                ret = false;
+            if (fullstop >= 1 && at_sign == 1) {
+                ret = true;
             }
             return ret;
-        }
-        else {
-            ret = false;
         }
         return ret;
     }
