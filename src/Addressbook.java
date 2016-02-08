@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -49,8 +48,7 @@ public class Addressbook {
     public void getNext() {
         if (current < addresses.size()) {
             current++;
-        }
-        else {
+        } else {
             addNew(new Address());
             current++;
         }
@@ -75,6 +73,7 @@ public class Addressbook {
 
     /**
      * Fügt ein neues Address-Objekt an addresses hinzu und erhöht amount und current um 1
+     *
      * @param address, das hinzuzufügende Objekt
      */
     public void addNew(Address address) {
@@ -85,6 +84,7 @@ public class Addressbook {
 
     /**
      * Ändert das Objekt an der Stelle current
+     *
      * @param address, das aktualisierte Objekt an Stelle current
      */
     public void changeCurrent(Address address) {
@@ -158,12 +158,14 @@ public class Addressbook {
      * Einsetzen", wobei als erstes die Eigenschaft surname verglichen wird
      */
     public void reSort() {
-        for (int i = 1; i < addresses.size(); i++) {
-            int j = i - 1;
-            Address temp = addresses.get(i).clone();
-            if (addresses.get(i).getSurname().compareTo(addresses.get(j).getSurname()) < 0) {
-                addresses.set(i, addresses.get(j).clone());
-                addresses.set(j, temp.clone());
+        for (int i = 0; i < addresses.size(); i++) {
+            for (int j = i; j < addresses.size(); j++) {
+                Address temp;
+                temp = addresses.get(j).clone();
+                if (temp.compareTo(addresses.get(i)) < 0) {
+                    addresses.get(j).setAddress(addresses.get(i).clone());
+                    addresses.get(i).setAddress(temp.clone());
+                }
             }
         }
     }
