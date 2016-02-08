@@ -244,9 +244,8 @@ public class Address {
      * Überprüft ob der übergebene Parameter als eine gültige E-mail-Adresse angesehen werden kann,
      * das heißt, dass der Paramater nicht null und nicht leer sein darf, nur ein '@' und mindestens
      * einen Punkt beinhaltet
-     *
-     * @param email
-     * @return
+     * @param email, zu kontrolliernde String
+     * @return true, wenn ein @ und mindestens ein Punkt einthalten ist, ansonsten false
      */
     private boolean checkEmail(String email) {
         boolean ret = false;
@@ -264,7 +263,6 @@ public class Address {
             if (fullstop >= 1 && at_sign == 1) {
                 ret = true;
             }
-            return ret;
         }
         return ret;
     }
@@ -274,7 +272,7 @@ public class Address {
      * als String an die gleichnamige
      * Methode setAddress(String s) übergibt,
      *
-     * @param address, Objekt mit den gewünschten Eigenschaften
+     * @param a, Objekt mit den gewünschten Eigenschaften
      */
     public void setAddress(Address a) {
         this.setAddress(a.toString());
@@ -313,7 +311,6 @@ public class Address {
             this.setMobilenr(array[8]);
             this.setTelnr(array[9]);
         } catch (ArrayIndexOutOfBoundsException e) {
-
         }
     }
 
