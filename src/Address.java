@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 /**
  * Created by Andreas on 03.02.16.
  */
@@ -18,6 +16,7 @@ public class Address {
 
     /**
      * Gibt den Vornamen des Address-Objektes zurück
+     *
      * @return name, Vorname des Objektes
      */
     public String getName() {
@@ -27,6 +26,7 @@ public class Address {
     /**
      * Setzt den Vornamen des Objektes, sofern der übergebene
      * Parameter nicht null und nicht leer ist
+     *
      * @param name, der gewünschte Vorname für das Objekt
      */
     public void setName(String name) {
@@ -36,6 +36,7 @@ public class Address {
 
     /**
      * Gibt den Nachnamen des Address-Objektes zurück
+     *
      * @return surname, Nachname des Objektes
      */
     public String getSurname() {
@@ -45,6 +46,7 @@ public class Address {
     /**
      * Setzt den Nachname des Objektes, sofern der übergebene
      * Parameter nicht null und nicht leer ist
+     *
      * @param surname, der gewünschte Nachname für das Objekt
      */
     public void setSurname(String surname) {
@@ -54,6 +56,7 @@ public class Address {
 
     /**
      * Gibt den Wohnort des Address-Objektes zurück
+     *
      * @return name, Wohnort des Objektes
      */
     public String getLocation() {
@@ -63,6 +66,7 @@ public class Address {
     /**
      * Setzt den Wohnort des Objektes, sofern der übergebene
      * Parameter nicht null und nicht leer ist
+     *
      * @param location, der gewünschte Wohnort für das Objekt
      */
     public void setLocation(String location) {
@@ -72,6 +76,7 @@ public class Address {
 
     /**
      * Gibt die Postleitzahl des Address-Objektes zurück
+     *
      * @return zipcode, Postleitzahl des Objektes
      */
     public int getZipcode() {
@@ -81,6 +86,7 @@ public class Address {
     /**
      * Setzt die Postleitzahl des Objektes, sofern der übergebene
      * Parameter fünf Stellen hat und größer als 0 ist
+     *
      * @param zipcode, die gewünschte Postleitzahl für das Objekt
      */
     public void setZipcode(int zipcode) {
@@ -90,6 +96,7 @@ public class Address {
 
     /**
      * Gibt das Land des Address-Objektes zurück
+     *
      * @return country, Land des Objektes
      */
     public String getCountry() {
@@ -99,6 +106,7 @@ public class Address {
     /**
      * Setzt das Land des Objektes, sofern der übergebene
      * Parameter nicht null und nicht leer ist
+     *
      * @param country, das gewünschte Land für das Objekt
      */
     public void setCountry(String country) {
@@ -108,6 +116,7 @@ public class Address {
 
     /**
      * Gibt die Straße des Address-Objektes zurück
+     *
      * @return street, Straße des Objektes
      */
     public String getStreet() {
@@ -117,6 +126,7 @@ public class Address {
     /**
      * Setzt die Straße des Objektes, sofern der übergebene
      * Parameter nicht null und nicht leer ist
+     *
      * @param street, die gewünschte Straße für das Objekt
      */
     public void setStreet(String street) {
@@ -126,6 +136,7 @@ public class Address {
 
     /**
      * Gibt die Hausnummer des Address-Objektes zurück
+     *
      * @return housenr, Hausnummer des Objektes
      */
     public int getHousenr() {
@@ -135,6 +146,7 @@ public class Address {
     /**
      * Setzt die Hausnummer des Objektes, sofern der übergebene
      * Parameter größer als 0 ist.
+     *
      * @param housenr, der gewünschte Vorname für das Objekt
      */
     public void setHousenr(int housenr) {
@@ -144,6 +156,7 @@ public class Address {
 
     /**
      * Gibt die Mobiltelefonnummer des Address-Objektes zurück
+     *
      * @return mobilenr, Mobiltelefonnummer des Objektes
      */
     public String getMobilenr() {
@@ -154,6 +167,7 @@ public class Address {
      * Setzt die Mobiltelefonnummer des Objektes, sofern der übergebene
      * Parameter nicht null, nicht leer ist, zehn Stellen hat und nur
      * Ziffern enthält
+     *
      * @param mobilenr, die gewünschte Mobiltelefonnummer für das Objekt
      */
     public void setMobilenr(String mobilenr) {
@@ -164,6 +178,7 @@ public class Address {
 
     /**
      * Gibt die Telefonnummer des Address-Objektes zurück
+     *
      * @return telnr, Telefonnummer des Objektes
      */
     public String getTelnr() {
@@ -174,6 +189,7 @@ public class Address {
      * Setzt die Telefonnummer des Objektes, sofern der übergebene
      * Parameter nicht null, nicht leer ist, zehn Stellen hat und
      * nur Ziffern beinhaltet
+     *
      * @param telnr, der gewünschte Vorname für das Objekt
      */
     public void setTelnr(String telnr) {
@@ -185,6 +201,7 @@ public class Address {
     /**
      * Kontrolliert ob der übergebene String nur Zahlen enthält, sofern
      * dieser nicht null und nicht leer ist.
+     *
      * @param s, der zu kontrolliernde String
      * @return ret, das Ergebnis der Kontrolle, true falls der String nur
      * Ziffern enthält und false wenn dies nicht der Fall ist
@@ -196,8 +213,7 @@ public class Address {
                 if (!Character.isDigit(s.charAt(i)))
                     ret = false;
             }
-        }
-        else {
+        } else {
             ret = false;
         }
         return ret;
@@ -205,6 +221,7 @@ public class Address {
 
     /**
      * Gibt die E-mail-Adresse des Address-Objektes zurück
+     *
      * @return email, E-mail-Adresse des Objektes
      */
     public String getEmail() {
@@ -215,6 +232,7 @@ public class Address {
      * Setzt die Email-Adresse des Objektes, sofern der übergebene
      * Parameter nicht null,  nicht leer ist und ein '@' und mindestens einen
      * Punkt beinhaltet
+     *
      * @param email, die gewünschte Email-Adresse für das Objekt
      */
     public void setEmail(String email) {
@@ -226,6 +244,7 @@ public class Address {
      * Überprüft ob der übergebene Parameter als eine gültige E-mail-Adresse angesehen werden kann,
      * das heißt, dass der Paramater nicht null und nicht leer sein darf, nur ein '@' und mindestens
      * einen Punkt beinhaltet
+     *
      * @param email
      * @return
      */
@@ -254,27 +273,30 @@ public class Address {
      * Setzt alle Eigenschaften eines Address-Objektes indem es das übergebene Objekt
      * als String an die gleichnamige
      * Methode setAddress(String s) übergibt,
+     *
      * @param address, Objekt mit den gewünschten Eigenschaften
      */
-    public void setAddress(Address address) {
-        this.setAddress(address.toString());
+    public void setAddress(Address a) {
+        this.setAddress(a.toString());
     }
 
     /**
      * Gibt die Eigenschaften des Objektes in ihrer Stringentsprechung züruck, wobei jede
      * Eigenschaft durch ein Semikolon getrennt wird
+     *
      * @return String, der alle Eigenschaften des Objektes enthält
      */
     public String toString() {
         return getSurname() + ";" + getName() + ";" + getStreet() + ";" + getHousenr() + ";" +
-                 getLocation() + ";" + getZipcode() + ";" + getCountry() + ";" + getEmail() + ";" +
-                    getMobilenr() + ";" + getTelnr();
+                getLocation() + ";" + getZipcode() + ";" + getCountry() + ";" + getEmail() + ";" +
+                getMobilenr() + ";" + getTelnr();
     }
 
     /**
      * Setzt alle Eigenschaften eines Address-Objektes, sofern der Parameter
      * nicht null und nicht leer ist indem es den übergebenen String
      * an den Semikolons aufteilt
+     *
      * @param s, die gewünschten Eigenschaften für das Objekt in einem String zusammengefasst
      */
     public void setAddress(String s) {
@@ -290,8 +312,7 @@ public class Address {
             this.setEmail(array[7]);
             this.setMobilenr(array[8]);
             this.setTelnr(array[9]);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
 
         }
     }
@@ -299,11 +320,46 @@ public class Address {
     /**
      * Kopiert alle Eigenschaften des Objektes auf ein neues Objekt
      * und gibt dieses zurück
+     *
      * @return ret, Objekt mit den gleichen Eigenschaften wie das zu klonende Objekt
      */
     public Address clone() {
         Address ret = new Address();
         ret.setAddress(this);
+        return ret;
+    }
+
+    /**
+     * Vergleicht zwei Address-Objekte und gibt einen
+     * postiven Wert zurück, falls a größer ist. 0 wird zurückgegeben
+     * wenn die Objekte identisch sind und ein negativer Wert wird
+     * zurückgegeben wenn a kleiner ist
+     *
+     * @param a, das zu vergleichende Objekt
+     * @return ret, Ergebnis des Vergleichs
+     */
+    public int compareTo(Address a) {
+        int ret = 0;
+        if (this.getSurname() != null && a.getSurname() != null)
+            ret = this.getSurname().compareTo(a.getSurname());
+        if (ret == 0 && this.getName() != null && a.getName() != null)
+            ret = this.getName().compareTo(a.getName());
+        if (ret == 0 && this.getStreet() != null && a.getStreet() != null)
+            ret = this.getStreet().compareTo(a.getStreet());
+        if (ret == 0 && this.getHousenr() != 0 && a.getHousenr() != 0)
+            ret = this.getHousenr() - a.getHousenr();
+        if (ret == 0 && this.getLocation() != null && a.getLocation() != null)
+            ret = this.getLocation().compareTo(a.getLocation());
+        if (ret == 0 && this.getZipcode() != 0 && a.getZipcode() != 0)
+            ret = this.getZipcode() - a.getZipcode();
+        if (ret == 0 && this.getCountry() != null && a.getCountry() != null)
+            ret = this.country.compareTo(a.getCountry());
+        if (ret == 0 && this.getEmail() != null && a.getEmail() != null)
+            ret = this.getEmail().compareTo(a.getEmail());
+        if (ret == 0 && this.getMobilenr() != null && a.getMobilenr() != null)
+            ret = this.getMobilenr().compareTo(a.getMobilenr());
+        if (ret == 0 && this.getTelnr() != null && a.getTelnr() != null)
+            ret = this.getTelnr().compareTo(a.getTelnr());
         return ret;
     }
 
