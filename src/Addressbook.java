@@ -10,12 +10,11 @@ public class Addressbook {
     private List<Address> addresses;
     private int current;
     private int amount;
+    private String path;
 
     public String getPath() {
         return path;
     }
-
-    private String path;
 
     /**
      * Customkonstruktor, der das ArrayList erstellt und die aktuelle
@@ -119,10 +118,13 @@ public class Addressbook {
      * @param address, das hinzuzufügende Objekt
      */
     public int addNew(Address address) {
-        int ret = 0;
-        addresses.add(address);
-        current++;
-        amount++;
+        int ret = -1;
+        if (address != null) {
+            ret = 0;
+            addresses.add(address);
+            current++;
+            amount++;
+        }
         return ret;
     }
 
@@ -131,70 +133,104 @@ public class Addressbook {
      *
      * @param address, das aktualisierte Objekt an Stelle current
      */
-    public void changeCurrent(Address address) {
-        addresses.get(current).setAddress(address);
+    public int changeCurrent(Address address) {
+        int ret = 0;
+        if (address != null) {
+            addresses.get(current).setAddress(address);
+        } else {
+            ret = -1;
+        }
+        return ret;
     }
 
     /**
      * Löscht das Objekt an der Stelle current und
      * reduziert amount um 1
      */
-    public void deleteCurrent() {
+    public int deleteCurrent() {
+        int ret = 0;
         addresses.remove(current);
         amount--;
+        if (addresses.get(current) == null) {
+            ret = -1;
+        }
+        return ret;
     }
 
     /**
      * Löscht den gesammten Inhalt von addresses und setzt current auf -1
      */
-    public void deleteAll() {
-        addresses.clear();
-        current = -1;
+    public int deleteAll() {
+        int ret = 0;
+        if (!addresses.isEmpty()) {
+            addresses.clear();
+            amount = 0;
+            current = -1;
+        } else {
+            ret = -1;
+        }
+        return ret;
     }
 
     /**
      * Liest Address-Objekte aus einer CSV-Datei im Pfad path aus und speichert
      * sie in addresses, wobei bei jedem Hinzufügen amount um 1 erhöht wird
      */
-    public void readAddresses() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            while (true) {
-                String line = reader.readLine();
-                if (line == null || line.isEmpty())
-                    // Dateiende erkannt
-                    break;
-                else {
-                    Address input = new Address();
-                    input.setAddress(line);
-                    addresses.add(input);
-                    amount++;
+    public int readAddresses() {
+        int ret = 0;
+        this.deleteAll();
+        if (path == null)
+            ret = -1;
+        if (ret == 0) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(path));
+                while (true) {
+                    String line = reader.readLine();
+                    if (line == null || line.isEmpty())
+                        // Dateiende erkannt
+                        break;
+                    else {
+                        Address input = new Address();
+                        input.setAddress(line);
+                        addresses.add(input);
+                        amount++;
+                    }
                 }
+                reader.close();
+            } catch (FileNotFoundException e) {
+                ret = -1;
+            } catch (IOException e) {
+                ret = -3;
             }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Datei nicht gefunden");
-        } catch (IOException e) {
-            System.out.println("Lesefehler in Datei");
         }
+        return ret;
     }
 
     /**
      * Schreibt den Inhalt von addresses in die Datei im Pfad path
      */
-    public void writeAddresses() {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-            for (Address x : addresses) {
-                if (x != null) {
-                    writer.write(x.toString());
-                    writer.write("\n");
-                }
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Datei nicht angelegt");
+    public int writeAddresses() {
+        int ret = 0;
+        if (path == null) {
+            ret = -1;
         }
+        if (ret == 0) {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+                for (Address x : addresses) {
+                    if (x != null) {
+                        writer.write(x.toString());
+                        writer.write("\n");
+                    }
+                }
+                writer.close();
+            } catch (FileNotFoundException e) {
+                ret = -2;
+            } catch (IOException e) {
+                ret = -3;
+            }
+        }
+        return ret;
     }
 
     /**
