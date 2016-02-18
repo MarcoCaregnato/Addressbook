@@ -14,6 +14,18 @@ public class Address {
     private String mobilenr;
     private String telnr;
 
+    public Address() {
+        surname = "";
+        name = "";
+        street = "";
+        location = "";
+        country = "";
+        email = "";
+        mobilenr = "";
+        telnr = "";
+
+    }
+
     /**
      * Gibt den Vornamen des Address-Objektes zurück
      *

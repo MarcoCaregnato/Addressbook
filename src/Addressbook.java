@@ -10,7 +10,12 @@ public class Addressbook {
     private List<Address> addresses;
     private int current;
     private int amount;
-    private String path = "/Users/Andreas/Desktop/test/test.csv";
+
+    public String getPath() {
+        return path;
+    }
+
+    private String path;
 
     /**
      * Customkonstruktor, der das ArrayList erstellt und die aktuelle
@@ -21,6 +26,17 @@ public class Addressbook {
         current = 0;
     }
 
+    public int getAmount() {
+        amount = addresses.size();
+        return amount;
+    }
+
+    public void setPath(String path) {
+        if (path != null && !path.isEmpty()) {
+            this.path = path;
+        }
+    }
+
     /**
      * Gibt das Address-Objekt an der Stelle current im ArrayList
      * addresses zurück
@@ -28,47 +44,73 @@ public class Addressbook {
      * @return Address-Objekt an Stelle current
      */
     public Address getCurrent() {
-        return addresses.get(current);
+        Address ret;
+        if (addresses.get(current) == null)
+            ret = null;
+        else
+            ret = addresses.get(current);
+        return ret;
     }
 
     /**
      * Reduziert current um 1, sofern current größer oder gleich 1 ist
      */
-    public void getPrevious() {
-        if (current >= 1) {
+    public Address getPrevious() {
+        Address ret;
+        if (current >= 1 && addresses.get(current - 1) != null) {
             current--;
+            ret = getCurrent();
+        } else {
+            ret = null;
         }
+        return ret;
     }
 
     /**
      * Erhöht current um 1, sofern current kleiner als die Stellenanzahl von
-     * addresses ist, ansonsten wird ein neues Address-Objekt hinzugefügt und
+     * addresses ist und gibt , ansonsten wird ein neues Address-Objekt hinzugefügt und
      * dann current um 1 erhöht.
      */
-    public void getNext() {
-        if (current < addresses.size()) {
+    public Address getNext() {
+        Address ret;
+        if (current < addresses.size() && addresses.get(current) != null) {
             current++;
+            ret = addresses.get(current);
         } else {
-            addNew(new Address());
-            current++;
+            ret = null;
         }
-
+        return ret;
     }
 
     /**
      * Setzt current auf 0, sodass der Benutzer auf das erste Element in addresses
      * zugreifen kann
      */
-    public void getFirst() {
-        current = 0;
+    public Address getFirst() {
+        Address ret;
+        if (addresses.size() != 0) {
+            current = 0;
+            ret = addresses.get(current);
+        } else {
+            ret = null;
+        }
+        return ret;
     }
 
     /**
      * Setzt current auf das letzte Element im ArrayList addresses, sodass der Benutzer
      * auf das letzte Objekt zugreifen kann
      */
-    public void getLast() {
-        current = addresses.size() - 1;
+    public Address getLast() {
+        Address ret;
+        if (addresses.size() != 0) {
+            current = addresses.size() - 1;
+            ret = addresses.get(current);
+        } else {
+            ret = null;
+        }
+        return ret;
+
     }
 
     /**
@@ -76,10 +118,12 @@ public class Addressbook {
      *
      * @param address, das hinzuzufügende Objekt
      */
-    public void addNew(Address address) {
+    public int addNew(Address address) {
+        int ret = 0;
         addresses.add(address);
         current++;
         amount++;
+        return ret;
     }
 
     /**
