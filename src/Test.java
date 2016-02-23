@@ -4,10 +4,9 @@
 public class Test {
 
     public static void main(String[] args) {
-        //new AddressbookGUI();
         Addressbook test = new Addressbook();
         test.readAddresses();
-        test.deleteAll();
+        test.setPath("/Users/Andreas/Desktop/test/test.csv");
         Address neu = new Address();
         neu.setAddress("Resch;Andreas;Riedl;19;Steinegg;39053;Italien;andreas.resch@tfobz.net;3420447584;0471376702");
         test.addNew(neu);
@@ -27,19 +26,17 @@ public class Test {
         neu5.setAddress("Resch;Julia;Riedl;19;Steinegg;39053;Italien;resch.julia@kaserer.it;6359663598;0471376702");
         test.addNew(neu5);
 
-        test.getFirst();
-        System.out.println(test.getCurrent().toString() + "\n");
-        test.getNext();
-        test.getNext();
-        System.out.println(test.getCurrent().toString() + "\n");
+        //test.getFirst();
+        //System.out.println(test.getCurrent().toString() + "\n");
+        //test.getNext();
+        //test.getNext();
+        //System.out.println(test.getCurrent().toString() + "\n");
 
-        test.getLast();
-        System.out.println(test.getCurrent().toString() + "\n");
-        test.getPrevious();
-        test.getPrevious();
-        System.out.println(test.getCurrent().toString() + "\n");
-
-        test.reSort();
-        test.writeAddresses();
+        //test.getLast();
+        //System.out.println(test.getCurrent().toString() + "\n");
+        //test.getPrevious();
+        //test.getPrevious();
+        //System.out.println(test.getCurrent().toString() + "\n");
+        System.out.println(test.writeAddresses());
     }
 }
