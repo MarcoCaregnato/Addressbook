@@ -59,7 +59,7 @@ public class Addressbook {
      */
     public Address getCurrent() {
         Address ret;
-        if (addresses.get(current) == null)
+        if (current >= addresses.size())
             ret = null;
         else
             ret = addresses.get(current);
@@ -91,7 +91,7 @@ public class Addressbook {
      */
     public Address getNext() {
         Address ret;
-        if (current < addresses.size() - 1 && addresses.get(current) != null) {
+        if (current < addresses.size() - 1) {
             current++;
             ret = addresses.get(current);
         } else {
@@ -150,7 +150,7 @@ public class Addressbook {
         if (address != null) {
             ret = 0;
             addresses.add(address);
-            current++;
+            current = addresses.size() - 1;
             amount++;
         }
         return ret;
@@ -193,8 +193,8 @@ public class Addressbook {
         int ret = 0;
         addresses.remove(current);
         amount--;
-        if (addresses.get(current) == null) {
-            ret = -1;
+        if (current >= addresses.size()) {
+            ret -= 1;
         }
         return ret;
     }
