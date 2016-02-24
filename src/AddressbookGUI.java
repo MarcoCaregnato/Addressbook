@@ -6,9 +6,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
-public class AddressbookGUI extends JFrame {
+public class AdressbuchGUI extends JFrame {
 
-    Address space = new Address();
+    private static Address address = new Address();
+    private static Addressbook addressbook;
 
     private JLabel vorname;
     private JTextField vornamefield;
@@ -47,12 +48,11 @@ public class AddressbookGUI extends JFrame {
     private JButton begin;
     private JButton end;
     private JButton deleteall;
-    private Addressbook persson;
 
-    public AddressbookGUI() {
-        persson = new Addressbook();
-        persson.setPath("/Users/Andreas/IdeaProjects/Adressbuch/addresslist.csv");
-        persson.readAddresses();
+    public AdressbuchGUI() {
+        addressbook = new Addressbook();
+        addressbook.setPath("/home/oem/Documents/Schule/Informatik/test/test.csv");
+        addressbook.readAddresses();
         //Fenster Titel
         setTitle("Adressbuch");
         //Fenstergroesse
@@ -63,8 +63,8 @@ public class AddressbookGUI extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 vergleich();
-                persson.reSort();
-                persson.writeAddresses();
+                addressbook.reSort();
+                addressbook.writeAddresses();
                 System.exit(0);
             }
         });
@@ -149,40 +149,40 @@ public class AddressbookGUI extends JFrame {
         plzfield = new JTextField();
         plzfield.setBounds(345, 110, 60, 25);
 
-        //BUTTON naechste Person
+        //BUTTON naechste addressbook
         fore = new JButton();
         fore.setText("->");
         fore.setBounds(350, 250, 100, 30);
 
-        //BUTTON vorherige Person
+        //BUTTON vorherige addressbook
         back = new JButton();
         back.setText("<-");
         back.setBounds(200, 250, 100, 30);
 
-        //BUTTON erste Person
+        //BUTTON erste addressbook
         begin = new JButton();
         begin.setText("<|");
         begin.setBounds(50, 250, 100, 30);
 
-        //BUTTON letzte Person
+        //BUTTON letzte addressbook
         end = new JButton();
         end.setText("|>");
         end.setBounds(500, 250, 100, 30);
 
-        //BUTTON neue Person
+        //BUTTON neue addressbook
         neu = new JButton();
         neu.setText("new");
         neu.setBounds(50, 300, 175, 30);
 
-        //BUTTON Person loeschen
+        //BUTTON addressbook loeschen
         cancel = new JButton();
         cancel.setText("delete");
-        cancel.setBounds(400, 300, 175, 30);
+        cancel.setBounds(410, 300, 190, 30);
 
         //BUTTON alles loeschen
         deleteall = new JButton();
         deleteall.setText("delete all");
-        deleteall.setBounds(250, 300, 125, 30);
+        deleteall.setBounds(255, 300, 125, 30);
 
 
         Container contentPane = getContentPane();
@@ -227,8 +227,8 @@ public class AddressbookGUI extends JFrame {
         contentPane.add(deleteall);
 
         //Fenster sichbar machen
-        space = persson.getCurrent();
-        fuellen(space);
+        address = addressbook.getCurrent();
+        fuellen(address);
         setVisible(true);
 
         //JButton mit der Aufschrift: "<-"
@@ -236,17 +236,16 @@ public class AddressbookGUI extends JFrame {
                 new ActionListener() {
                     @Override
                     /**
-                     *  Kontrolliert ob die vorherige Person ungleich null ist.
-                     *  Ist das der Fall so wird die vorherige Person mit Hilfe
+                     *  Kontrolliert ob die vorherige addressbook ungleich null ist.
+                     *  Ist das der Fall so wird die vorherige addressbook mit Hilfe
                      *  der Methode füllen(Address i) ausgegeben,
                      *  ansont wird die Methode stackfail() aufgrufen.
                      */
                     public void actionPerformed(ActionEvent e) {
                         vergleich();
-                        space = persson.getPrevious();
-                        if (space != null) {
-                            fuellen(space);
-                            //einlesen();
+                        address = addressbook.getPrevious();
+                        if (address != null) {
+                            fuellen(address);
                         } else
                             stackfail();
                     }
@@ -256,20 +255,21 @@ public class AddressbookGUI extends JFrame {
         fore.addActionListener(
                 new ActionListener() {
                     /**
-                     * Kontrolliert ob die nächste Person ungleich null ist.
-                     * Ist das der Falll so wird die nächste Person mit Hilfe
+                     * Kontrolliert ob die nächste addressbook ungleich null ist.
+                     * Ist das der Falll so wird die nächste addressbook mit Hilfe
                      * der Methode füllen(Address i) ausgegeben,
                      * ansonst wird die Methode neu() aufgerufen.
                      */
                     public void actionPerformed(ActionEvent e) {
                         vergleich();
-                        space = persson.getNext();
-                        if (space != null) {
-                            fuellen(space);
-                            //einlesen();
+                        address = addressbook.getNext();
+                        if (address!= null) {
+                            fuellen(address);
                         } else {
-                            persson.addNew(new Address());
-                            neu();
+                        	if(addressbook.getCurrent().compareTo(new Address()) != 0){
+                        		addressbook.addNew(new Address());
+                            	neu();
+                        	}
                         }
                     }
                 }
@@ -279,13 +279,11 @@ public class AddressbookGUI extends JFrame {
         neu.addActionListener(
                 new ActionListener() {
                     /**
-                     * Ruft die Methode neu auf.
+                     * Ruft die Methode neu() auf.
                      */
                     public void actionPerformed(ActionEvent e) {
-                        //vergleich();
-                        persson.addNew(new Address());
+                        addressbook.addNew(new Address());
                         neu();
-                        //einlesen();
                     }
                 }
 
@@ -299,9 +297,8 @@ public class AddressbookGUI extends JFrame {
                      */
                     public void actionPerformed(ActionEvent e) {
                         vergleich();
-                        space = persson.getFirst();
-                        fuellen(space);
-                        //einlesen();
+                        address = addressbook.getFirst();
+                        fuellen(address);
 
 
                     }
@@ -316,9 +313,8 @@ public class AddressbookGUI extends JFrame {
                      */
                     public void actionPerformed(ActionEvent e) {
                         vergleich();
-                        space = persson.getLast();
-                        fuellen(space);
-                        //einlesen();
+                        address = addressbook.getLast();
+                        fuellen(address);
                     }
                 }
 
@@ -395,34 +391,34 @@ public class AddressbookGUI extends JFrame {
      * Diese Methode wird immer dann aufgrufen, wenn die JButtons
      * "<|", "<-","->", "|>", und "cancell" benutzt werden.
      *
-     * @param space die zu lesenden Membervariablen
+     * @param address die zu lesenden Membervariablen
      */
-    private void fuellen(Address space) {
-        if (space != null) {
-            if (space.getSurname() != null)
-                nachnamefield.setText(space.getSurname());
-            if (space.getName() != null)
-                vornamefield.setText(space.getName());
-            if (space.getStreet() != null)
-                strassefield.setText(space.getStreet());
-            if (space.getHousenr() != 0)
-                hausnummerfield.setText(String.valueOf(space.getHousenr()));
+    private void fuellen(Address address) {
+        if (address != null) {
+            if (address.getSurname() != null)
+                nachnamefield.setText(address.getSurname());
+            if (address.getName() != null)
+                vornamefield.setText(address.getName());
+            if (address.getStreet() != null)
+                strassefield.setText(address.getStreet());
+            if (address.getHousenr() != 0)
+                hausnummerfield.setText(String.valueOf(address.getHousenr()));
             else
                 hausnummerfield.setText("");
-            if (space.getLocation() != null)
-                ortfield.setText(space.getLocation());
-            if (space.getZipcode() != 0)
-                plzfield.setText(String.valueOf(space.getZipcode()));
+            if (address.getLocation() != null)
+                ortfield.setText(address.getLocation());
+            if (address.getZipcode() != 0)
+                plzfield.setText(String.valueOf(address.getZipcode()));
             else
                 plzfield.setText("");
-            if (space.getEmail() != null)
-                emailfield.setText(space.getEmail());
-            if (space.getTelnr() != null)
-                telnummerfield.setText(space.getTelnr());
-            if (space.getMobilenr() != null)
-                handynummerfield.setText(space.getMobilenr());
-            if (space.getCountry() != null)
-                landfield.setText(space.getCountry());
+            if (address.getEmail() != null)
+                emailfield.setText(address.getEmail());
+            if (address.getTelnr() != null)
+                telnummerfield.setText(address.getTelnr());
+            if (address.getMobilenr() != null)
+                handynummerfield.setText(address.getMobilenr());
+            if (address.getCountry() != null)
+                landfield.setText(address.getCountry());
         }
     }
 
@@ -434,7 +430,7 @@ public class AddressbookGUI extends JFrame {
      * hat. Ist man durch "delete all" an dieses Fenster gelangt
      * und man drückt "delete" so wird der ganze Speicher geleert.
      * Ist man jedoh durch "delete" an dieses Fenster gelangt und
-     * man drückt delete, so wird nur diese Person aus dem Speicher
+     * man drückt delete, so wird nur diese addressbook aus dem Speicher
      * entfernt die gerade angezeigt wir. Wird "quit" betätigt
      * so gelangt man auf das vorherige JFrame.
      *
@@ -466,13 +462,13 @@ public class AddressbookGUI extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (I == 1) {
-                            persson.deleteAll();
+                            addressbook.deleteAll();
                             neu();
                         } else {
-                            persson.deleteCurrent();
-                            space = persson.getCurrent();
-                            if (space != null)
-                                fuellen(space);
+                            addressbook.deleteCurrent();
+                            address = addressbook.getCurrent();
+                            if (address != null)
+                                fuellen(address);
                         }
                         error.dispose();
                     }
@@ -496,55 +492,14 @@ public class AddressbookGUI extends JFrame {
 
     /**
      * Schreibt in jedes Textfeld: " ", hinein sodass
-     * man ungehidert eine neue Person eingeben kann.
+     * man ungehidert eine neue addressbook eingeben kann.
      * Die Methode von aufgrufen sobald der JButton
      * "add new" gedrückt wird oder wenn das Ende der
      * des Adressbuches erreicht wurde.
      */
     private void neu() {
-        vornamefield.setText("");
-        nachnamefield.setText("");
-        hausnummerfield.setText("");
-        strassefield.setText("");
-        landfield.setText("");
-        ortfield.setText("");
-        emailfield.setText("");
-        plzfield.setText("");
-        handynummerfield.setText("");
-        telnummerfield.setText("");
+    	fuellen(new Address());
     }
-//    private void einlesen(){
-//        Address a = new Address();
-//		if(nachnamefield.getText() != null)
-//			a.setSurname(nachnamefield.getText());
-//		else
-//			a.setSurname("");
-//		if(vornamefield.getText() != null)
-//			a.setName(vornamefield.getText());
-//		if(strassefield.getText() != null)
-//			a.setStreet(strassefield.getText());
-//		if(hausnummerfield.getText() != null)
-//            try {
-//                a.setHousenr(Integer.parseInt(hausnummerfield.getText()));
-//            } catch (NumberFormatException e) {}
-//		if(ortfield.getText() != null)
-//			a.setLocation(ortfield.getText());
-//		if(plzfield.getText() != null)
-//            try {
-//                a.setZipcode(Integer.parseInt(plzfield.getText()));
-//            } catch (NumberFormatException e) {}
-//		if(emailfield.getText() != null)
-//			a.setEmail(emailfield.getText());
-//		if(telnummerfield.getText() != null)
-//			a.setTelnr((telnummerfield.getText()));
-//		if(handynummerfield.getText() != null)
-//			a.setMobilenr((handynummerfield.getText()));
-//		if(landfield.getText() != null)
-//			a.setCountry(landfield.getText());
-//		persson.addNew(a);
-//		persson.writeAddresses();
-//   }
-
     /**
      * Kontrolliert ob die Adresse verändert wurde
      * oder nicht, falls sie verändert wurde wird sie
@@ -552,11 +507,11 @@ public class AddressbookGUI extends JFrame {
      */
     private void vergleich() {
         Address cache = new Address();
-        if (space != null) {
+        if (address != null) {
             if (nachnamefield.getText() != null)
                 cache.setSurname(nachnamefield.getText());
             if (vornamefield.getText() != null)
-                space.setName(vornamefield.getText());
+                address.setName(vornamefield.getText());
             if (strassefield.getText() != null)
                 cache.setName(vornamefield.getText());
             if (hausnummerfield.getText() != null)
@@ -579,45 +534,9 @@ public class AddressbookGUI extends JFrame {
                 cache.setMobilenr(handynummer.getText());
             if (landfield.getText() != null)
                 cache.setCountry(landfield.getText());
-            if (cache.compareTo(space) != 0) {
-                persson.changeCurrent(cache);
-                //persson.writeAddresses();
+            if (cache.compareTo(address) != 0) {
+                addressbook.changeCurrent(cache);
             }
         }
-//		cache.setSurname(nachnamefield.getText());
-//		cache.setName(vornamefield.getText());
-//		cache.setHousenr(Integer.parseInt(hausnummerfield.getText()));
-//		cache.setLocation(ortfield.getText());
-//		cache.setCountry(landfield.getText());
-//		cache.setZipcode(Integer.parseInt(plzfield.getText()));
-//		cache.setTelnr(telnummerfield.getText());
-//		cache.setMobilenr(handynummer.getText());
-//		cache.setStreet(strassefield.getText());
-//		cache.setEmail(emailfield.getText());
-
     }
-//    private int kontrolle (){
-//    	int ret = 0;
-//		if(nachnamefield.getText() != null)
-//			space.setName(nachnamefield.getText()); ret++;
-//		if(vornamefield.getText() != null)
-//			space.setSurname(vornamefield.getText()); ret++;
-//		if(strassefield.getText() != null)
-//			space.setStreet(strassefield.getText());ret ++;
-//		if(hausnummerfield.getText() != null)
-//			space.setHousenr(Integer.parseInt(hausnummerfield.getText())); ret++;
-//		if(ortfield.getText() != null)
-//			space.setLocation(ortfield.getText()); ret ++;
-//		if(plzfield.getText() != null)
-//			space.setZipcode(Integer.parseInt(plzfield.getText())); ret++;
-//		if(emailfield.getText() != null)
-//			space.setEmail(emailfield.getText()); ret++;
-//		if(telnummerfield.getText() != null)
-//			space.setTelnr((telnummerfield.getText())); ret++;
-//		if(handynummerfield.getText() != null)
-//			space.setMobilenr((handynummerfield.getText())); ret++;
-//		if(landfield.getText() != null)
-//			space.setCountry(landfield.getText()); ret++;
-//		return ret;
-//    }
 }
