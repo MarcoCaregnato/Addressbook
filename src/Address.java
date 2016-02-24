@@ -339,6 +339,15 @@ public class Address {
     }
 
     /**
+     * Custom Konstruktor, der alle Werte für die Membervariablen vom String s bekommt und
+     * mit Hilfe der Methode setAddress setzt.
+     * @param s String mit den Werten für die Membervariablen
+     */
+    public Address(String s) {
+        this.setAddress(s);
+    }
+
+    /**
      * Vergleicht zwei Address-Objekte und gibt einen
      * postiven Wert zurück, falls a größer ist. 0 wird zurückgegeben
      * wenn die Objekte identisch sind und ein negativer Wert wird
